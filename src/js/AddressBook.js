@@ -1,7 +1,10 @@
 class AddressBook {
   storage = window.localStorage;
 
-  index() {}
+  index() {
+    const entries = this.storage.getItem("entries")
+    return JSON.parse(entries)
+  }
   create(data) {
     if (data.constructor === Object) {
       const oldEntries = this.storage.getItem("entries") || "[]";
