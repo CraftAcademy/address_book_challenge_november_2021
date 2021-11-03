@@ -3,8 +3,8 @@ const AddressBook = require("../../src/js/AddressBook");
 describe.only("AddressBook", () => {
   subject(() => new AddressBook());
   afterEach(() => {
-    window.localStorage.data = {}
-    sinon.reset()
+    window.localStorage.data = {};
+    sinon.reset();
   });
 
   it(() => is.expected.to.be.an("object"));
@@ -15,13 +15,12 @@ describe.only("AddressBook", () => {
 
   it(() => is.expected.to.respondTo("create"));
 
+  let getItemSpy, setItemSpy, stringifySpy, parseSpy, message;
+  getItemSpy = sinon.spy(window.localStorage, "getItem");
+  setItemSpy = sinon.spy(window.localStorage, "setItem");
+  stringifySpy = sinon.spy(JSON, "stringify");
+  parseSpy = sinon.spy(JSON, "parse");
   describe("#create", () => {
-    let getItemSpy, setItemSpy, stringifySpy, parseSpy, message;
-    getItemSpy = sinon.spy(window.localStorage, "getItem");
-    setItemSpy = sinon.spy(window.localStorage, "setItem");
-    stringifySpy = sinon.spy(JSON, "stringify");
-    parseSpy = sinon.spy(JSON, "parse");
-
     def("contactsInStorage", () =>
       JSON.parse(window.localStorage.data.entries)
     );
@@ -32,7 +31,7 @@ describe.only("AddressBook", () => {
       twitter: "@john_doe",
     });
 
-    def("invalidData", 'this is NOT an object!');
+    def("invalidData", "this is NOT an object!");
 
     context("first entry with valid data", () => {
       beforeEach(() => {
@@ -63,7 +62,7 @@ describe.only("AddressBook", () => {
         expect(message).to.equal("The entry was added to the address book");
       });
     });
-    context('with invalid data', () => {
+    context("with invalid data", () => {
       before(() => {
         message = $subject.create($invalidData);
       });
@@ -74,9 +73,22 @@ describe.only("AddressBook", () => {
     });
   });
 
-  describe('#index', () => {
-    
-  })
-  
+  describe("#index", () => {
+    let collection;
+    beforeEach(() => {
+      $subject.create({ name: "Thomas" });
+      $subject.create({ name: "Thadeus" });
+      $subject.create({ name: "Jessica" });
+      sinon.reset();
+      collection = $subject.index();
+    });
 
+    it("is expected to call on localStorage.getItem()", () => {
+      expect(getItemSpy).to.have.been.calledOnce;
+    });
+
+    it("is expected to return an array with 3 objects", () => {
+      expect(collection).to.have.length(3);
+    });
+  });
 });
