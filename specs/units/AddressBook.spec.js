@@ -87,8 +87,12 @@ describe.only("AddressBook", () => {
       expect(getItemSpy).to.have.been.calledOnce;
     });
 
+    it("is expected to call on JSON.parse()", () => {
+      expect(parseSpy).to.have.been.calledOnce;
+    });
+
     it("is expected to return an array with 3 objects", () => {
-      expect(collection).to.have.length(3);
+      expect(collection).to.ba.instanceOf(Array).and.have.length(3);
     });
   });
 });
