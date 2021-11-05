@@ -8,13 +8,30 @@
   </head>
   <body>
     <h1>Address Book</h1>
-    <div data-cy="address_form"></div>
-    <div data-cy="address_list"><ul></ul></div>
+    <div name="address_form">
+      <form action="" onsubmit="handleForm()">
+        <label for="name">Name: </label><input type="text" name="name" />
+        <label for="phone">Phone: </label><input type="text" name="phone" />
+        <label for="twitter">Twitter: </label><input type="text" name="twitter" />
+        <input type="submit" value="Save" name="submit"/>
+      </form>
+    </div>
+    <div name="address_list"><ul></ul></div>
     <script src="./js/AddressBook.js"></script>
     <script>
-      const addressList = document.querySelector("[data-cy=address_list] ul");
+      const addressBook = new AddressBook();
+      const addressList = document.querySelector("[name=address_list] ul");
+      const handleForm = () => {
+        event.preventDefault();
+        const name = event.target.elements.name.value
+        const phone = event.target.elements.phone.value
+        const twitter = event.target.elements.twitter.value
+        addressBook.create({name: name, phone: phone, twitter: twitter})
+        displayEntries()
+        event.target.reset()
+      };
       const displayEntries = () => {
-        const addressBook = new AddressBook();
+        addressList.innerHTML = ''
         const entries = addressBook.index();
         let html;
         entries.forEach((entry) => {
@@ -26,9 +43,9 @@
           addressList.appendChild(newListItem);
         });
       };
-      document.addEventListener('DOMContentLoaded', () => {
-        displayEntries()
-      })
+      document.addEventListener("DOMContentLoaded", () => {
+        displayEntries();
+      });
     </script>
   </body>
 </html>
