@@ -9,17 +9,26 @@
   <body>
     <h1>Address Book</h1>
     <div data-cy="address_form"></div>
-    <div data-cy="address_list"></div>
+    <div data-cy="address_list"><ul></ul></div>
     <script src="./js/AddressBook.js"></script>
-    <script >
-      const addressList = document.querySelector('[data-cy=address_list]')
-      const addressBook = new AddressBook()
-      // debugger
-      const entries = addressBook.index()
-      let entriesElements = entries.map(entry => {
-        return (`<h1>${entry.name}</h1>`)
+    <script>
+      const addressList = document.querySelector("[data-cy=address_list] ul");
+      const displayEntries = () => {
+        const addressBook = new AddressBook();
+        const entries = addressBook.index();
+        let html;
+        entries.forEach((entry) => {
+          html = `<span>Name: </span><span>${entry.name}</span> `;
+          html += `<span>Phone: </span><span>${entry.phone}</span> `;
+          html += `<span>Twitter: </span><span>${entry.twitter}</span>`;
+          let newListItem = document.createElement("li");
+          newListItem.innerHTML = html;
+          addressList.appendChild(newListItem);
+        });
+      };
+      document.addEventListener('DOMContentLoaded', () => {
+        displayEntries()
       })
-      addressList.innerHTML = entriesElements
     </script>
   </body>
 </html>
