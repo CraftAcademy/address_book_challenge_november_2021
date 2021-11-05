@@ -1,6 +1,6 @@
 const AddressBook = require("../../src/js/AddressBook");
 
-describe.only("AddressBook", () => {
+describe("AddressBook", () => {
   subject(() => new AddressBook());
   afterEach(() => {
     window.localStorage.data = {};
@@ -92,7 +92,7 @@ describe.only("AddressBook", () => {
     });
 
     it("is expected to return an array with 3 objects", () => {
-      expect(collection).to.ba.instanceOf(Array).and.have.length(3);
+      expect(collection).to.be.instanceOf(Array).and.have.length(3);
     });
   });
 });

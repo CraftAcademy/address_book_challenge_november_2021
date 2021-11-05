@@ -8,5 +8,18 @@
   </head>
   <body>
     <h1>Address Book</h1>
+    <div data-cy="address_form"></div>
+    <div data-cy="address_list"></div>
+    <script src="./js/AddressBook.js"></script>
+    <script >
+      const addressList = document.querySelector('[data-cy=address_list]')
+      const addressBook = new AddressBook()
+      // debugger
+      const entries = addressBook.index()
+      let entriesElements = entries.map(entry => {
+        return (`<h1>${entry.name}</h1>`)
+      })
+      addressList.innerHTML = entriesElements
+    </script>
   </body>
 </html>
