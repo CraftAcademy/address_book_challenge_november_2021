@@ -30,6 +30,10 @@
         displayEntries()
         event.target.reset()
       };
+
+      const editEntry = (name) => {
+        debugger
+      }
       const displayEntries = () => {
         addressList.innerHTML = ''
         const entries = addressBook.index();
@@ -38,6 +42,7 @@
           html = `<span>Name: </span><span>${entry.name}</span> `;
           html += `<span>Phone: </span><span>${entry.phone}</span> `;
           html += `<span>Twitter: </span><span>${entry.twitter}</span>`;
+          html += `<button onclick="editEntry('${entry.name}')">Edit</button>`
           let newListItem = document.createElement("li");
           newListItem.innerHTML = html;
           addressList.appendChild(newListItem);
