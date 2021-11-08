@@ -9,7 +9,7 @@
   <body>
     <h1>Address Book</h1>
     <div name="address_form">
-      <form action="" onsubmit="handleForm()">
+      <form onsubmit="return handleForm(this)">
         <label for="name">Name: </label><input type="text" name="name" />
         <label for="phone">Phone: </label><input type="text" name="phone" />
         <label for="twitter">Twitter: </label><input type="text" name="twitter" />
@@ -18,39 +18,6 @@
     </div>
     <div name="address_list"><ul></ul></div>
     <script src="./js/AddressBook.js"></script>
-    <script>
-      const addressBook = new AddressBook();
-      const addressList = document.querySelector("[name=address_list] ul");
-      const handleForm = () => {
-        event.preventDefault();
-        const name = event.target.elements.name.value
-        const phone = event.target.elements.phone.value
-        const twitter = event.target.elements.twitter.value
-        addressBook.create({name: name, phone: phone, twitter: twitter})
-        displayEntries()
-        event.target.reset()
-      };
-
-      const editEntry = (name) => {
-        debugger
-      }
-      const displayEntries = () => {
-        addressList.innerHTML = ''
-        const entries = addressBook.index();
-        let html;
-        entries.forEach((entry) => {
-          html = `<span>Name: </span><span>${entry.name}</span> `;
-          html += `<span>Phone: </span><span>${entry.phone}</span> `;
-          html += `<span>Twitter: </span><span>${entry.twitter}</span>`;
-          html += `<button onclick="editEntry('${entry.name}')">Edit</button>`
-          let newListItem = document.createElement("li");
-          newListItem.innerHTML = html;
-          addressList.appendChild(newListItem);
-        });
-      };
-      document.addEventListener("DOMContentLoaded", () => {
-        displayEntries();
-      });
-    </script>
+    <script src="./js/app.js"></script>
   </body>
 </html>
