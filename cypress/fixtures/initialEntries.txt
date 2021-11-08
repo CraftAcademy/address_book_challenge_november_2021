@@ -1,1 +1,1 @@
-'[{"name": "Thomas", "phone": "031-121212", "twitter": "@thomasochman"}, {"name": "Barack", "phone": "+1 202-121212", "twitter": "@barackobama"}'
+'[{"name": "Thomas", "phone": "031-121212", "twitter": "@thomasochman"}, {"name": "Barack", "phone": "+1 202-121212", "twitter": "@barackobama"}]'
